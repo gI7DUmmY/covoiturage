@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+import FormInput from './FormInput'
+
 function App() {
   const [formData, setFormData] = useState({
     pers: 1,
@@ -9,76 +11,68 @@ function App() {
   })
   const [total, setTotal] = useState(0)
 
-  const handleChangePers = value => {
-    setFormData({ ...formData, pers: value })
-  }
+  const handleChange = e => {
+    const key = e.target.id
+    const value = e.target.value
 
-  const handleChangeDist = value => {
-    setFormData({ ...formData, dist: value })
-  }
-
-  const handleChangePrix = value => {
-    setFormData({ ...formData, prix: value })
-  }
-
-  const handleChangeConso = value => {
-    setFormData({ ...formData, conso: value })
+    setFormData(prevState => ({ ...prevState, [key]: value }))
   }
 
   useEffect(() => {
-    console.log(formData)
-    setTotal(
-      (
-        ((formData.dist / 100) * formData.conso * formData.prix) /
-        formData.pers
-      ).toFixed(2)
-    )
+    formData.pers > 0 &&
+      formData.dist >= 0 &&
+      formData.conso >= 0 &&
+      formData.prix >= 0 &&
+      setTotal(
+        (
+          ((formData.dist / 100) * formData.conso * formData.prix) /
+          Math.round(formData.pers)
+        ).toFixed(2)
+      )
   }, [formData])
 
   return (
-    <>
-      <h1 className='text-4xl font-bold text-center'>Covoiturage</h1>
-      <form className='mt-10 mx-3 flex justify-between'>
-        <label htmlFor='pers'>Combien de personnes</label>
-        <input
-          type='number'
-          id='pers'
-          className='w-10'
-          min='1'
-          max='5'
+    <div className='bg-gradient-to-r from-emerald-300 to-teal-700 h-screen'>
+      <h1 className='text-4xl font-bold text-center text-slate-50'>
+        Covoiturage
+      </h1>
+      <form className='mt-10 mx-auto flex flex-col'>
+        <FormInput
+          id={'pers'}
+          min={1}
+          max={5}
           value={formData.pers}
-          onChange={e => handleChangePers(e.target.value)}
+          handleChange={handleChange}
+          label={'Combien de personnes'}
         />
-        <label htmlFor='dist'>Distance en Km</label>
-        <input
-          type='number'
-          id='dist'
-          min='0'
+
+        <FormInput
+          id={'dist'}
+          min={0}
           value={formData.dist}
-          onChange={e => handleChangeDist(e.target.value)}
+          handleChange={handleChange}
+          label={'Distance en Km'}
         />
-        <label htmlFor='conso'>Conso en L/100Km</label>
-        <input
-          type='number'
-          id='conso'
-          min='0'
+        <FormInput
+          id={'conso'}
+          min={0}
           value={formData.conso}
-          onChange={e => handleChangeConso(e.target.value)}
+          handleChange={handleChange}
+          label={'Conso en L/100Km'}
         />
-        <label htmlFor='prix'>Coût de l'essence en €</label>
-        <input
-          type='number'
-          id='prix'
-          min='0'
+        <FormInput
+          id={'prix'}
+          min={0}
           value={formData.prix}
-          onChange={e => handleChangePrix(e.target.value)}
+          handleChange={handleChange}
+          label={"Coût de l'essence en €/L"}
         />
       </form>
-      <div className='mt-10 text-center'>
-        <h3 className='text-xl'>Coût par personne</h3>
+      <div className='mt-10 text-center bg-slate-50'>
+        <h3 className='text-xl font-semibold'>Coût par personne</h3>
         <p className='text-2xl font-bold'>{total} €</p>
       </div>
-    </>
+    </div>
   )
 }
 
