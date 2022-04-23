@@ -33,10 +33,10 @@ function App() {
 
   return (
     <div className='bg-gradient-to-r from-emerald-300 to-teal-700 h-screen'>
-      <h1 className='text-4xl font-bold text-center text-slate-50'>
+      <h1 className='pt-10 text-4xl font-bold text-center text-slate-50'>
         Covoiturage
       </h1>
-      <form className='mt-10 mx-auto flex flex-col'>
+      <form className='mt-10 flex flex-col items-center md:flex-row md:justify-center md:gap-x-4'>
         <FormInput
           id={'pers'}
           min={1}
