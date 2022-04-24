@@ -68,7 +68,7 @@ function App() {
           label={"Coût de l'essence en €/L"}
         />
       </form>
-      <div className='mt-10 text-center bg-slate-50'>
+      <div className='mt-10 py-1 text-center bg-slate-50'>
         <h3 className='text-xl font-semibold'>Coût par personne</h3>
         <p className='text-2xl font-bold'>{total} €</p>
       </div>
