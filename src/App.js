@@ -8,6 +8,7 @@ function App() {
     dist: 0,
     conso: 0,
     prix: 0,
+    peage: 0,
   })
   const [total, setTotal] = useState(0)
 
@@ -23,9 +24,11 @@ function App() {
       formData.dist >= 0 &&
       formData.conso >= 0 &&
       formData.prix >= 0 &&
+      formData.peage >= 0 &&
       setTotal(
         (
-          ((formData.dist / 100) * formData.conso * formData.prix) /
+          (formData.dist * (formData.conso / 100) * formData.prix +
+            formData.peage) /
           Math.round(formData.pers)
         ).toFixed(2)
       )
@@ -36,7 +39,7 @@ function App() {
       <h1 className='pt-10 text-4xl font-bold text-center text-slate-50'>
         Covoiturage
       </h1>
-      <form className='mt-10 flex flex-col items-center md:flex-row md:justify-center md:gap-x-4'>
+      <form className='mt-10 flex flex-col items-center md:flex-row md:justify-center md:gap-x-4 md:px-2'>
         <FormInput
           id={'pers'}
           min={1}
@@ -53,6 +56,7 @@ function App() {
           handleChange={handleChange}
           label={'Distance en Km'}
         />
+
         <FormInput
           id={'conso'}
           min={0}
@@ -60,12 +64,21 @@ function App() {
           handleChange={handleChange}
           label={'Conso en L/100Km'}
         />
+
         <FormInput
           id={'prix'}
           min={0}
           value={formData.prix}
           handleChange={handleChange}
           label={"Coût de l'essence en €/L"}
+        />
+
+        <FormInput
+          id={'peage'}
+          min={0}
+          value={formData.peage}
+          handleChange={handleChange}
+          label={'Péage en €'}
         />
       </form>
       <div className='mt-10 py-1 text-center bg-slate-50'>
