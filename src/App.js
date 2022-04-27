@@ -14,7 +14,7 @@ function App() {
 
   const handleChange = e => {
     const key = e.target.id
-    const value = e.target.value
+    const value = parseFloat(e.target.value)
 
     setFormData(prevState => ({ ...prevState, [key]: value }))
   }
