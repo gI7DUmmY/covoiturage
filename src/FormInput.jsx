@@ -8,24 +8,28 @@ const formInput = ({ id, min, max, value, handleChange, label }) => {
   const icon = id => {
     switch (id) {
       case 'pers':
-        return <TiGroup className='inline text-purple-800 lg:block lg:m-auto' />
+        return (
+          <TiGroup className='inline text-purple-800 h-5 w-auto lg:block lg:m-auto' />
+        )
 
       case 'dist':
         return (
-          <GiPathDistance className='inline text-green-700 md:block md:m-auto md:mt-1' />
+          <GiPathDistance className='inline text-green-700 h-5 w-auto md:block md:m-auto md:mt-1' />
         )
 
       case 'conso':
         return (
-          <FaBurn className='inline align-baseline text-red-700 md:mt-2 lg:block lg:m-auto' />
+          <FaBurn className='inline align-baseline text-red-600 h-5 w-auto md:mt-2 lg:block lg:m-auto' />
         )
 
       case 'prix':
-        return <GiGasPump className='inline align-baseline text-orange-600' />
+        return (
+          <GiGasPump className='inline align-baseline text-orange-600 h-5 w-auto' />
+        )
 
       case 'peage':
         return (
-          <FaRoad className='inline align-middle text-slate-500 md:block md:mx-auto md:mt-2' />
+          <FaRoad className='inline align-middle text-slate-500 h-5 w-auto md:block md:mx-auto md:mt-2' />
         )
 
       default:
